@@ -1,0 +1,35 @@
+name: Publish PHSL 🛡️ to PyPI
+
+# 触发条件：当你每次在 GitHub 上点击 "Release -> Publish release" 时自动执行
+on:
+  release:
+    types: [published]
+
+jobs:
+  build-and-publish:
+    name: Build and publish Python 📦 to PyPI
+    runs-on: ubuntu-latest
+    
+    # 🚨 极度关键的 OIDC 权限声明，没有它 PyPI 就不认识 GitHub
+    permissions:
+      id-token: write  # 允许申请临时身份令牌
+      contents: read   # 允许读取你的代码
+      
+    steps:
+    - name: Checkout source code 📥
+      uses: actions/checkout@v4
+
+    - name: Set up Python 🐍
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.10" # 这里适配你当前的 Python 版本
+
+    - name: Install build tool 🛠️
+      run: python -m pip install build --user
+
+    - name: Build the PHSL package 📦
+      run: python -m build
+
+    - name: Publish distribution to PyPI 🚀
+      uses: pypa/gh-action-pypi-publish@release/v1
+      # 注意：这里不需要配置任何 password，OIDC 会魔法般地处理一切
