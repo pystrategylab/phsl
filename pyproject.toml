@@ -1,0 +1,43 @@
+[build-system]
+# 定义打包工具：使用目前最主流、最稳定的 setuptools 后端
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+# 核心身份信息 (PyPI 上的唯一标识)
+name = "phsl"
+version = "0.1.0"
+description = "PHSL (Python Historical Strategy Lab) - 璇玑定量化战略审计终端与多智能体沙盘"
+readme = "README.md"
+requires-python = ">=3.9"
+
+# 作者信息 (请替换为你自己的名字和邮箱)
+authors = [
+  { name="Peng Hao", email="research@pystrategylab.com" },
+]
+
+# 分类标签：让全球开发者在 PyPI 上更容易搜索到你的库
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Financial and Insurance Industry",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+]
+
+# 🚨 核心依赖清单：当别人 pip install phsl 时，系统会自动帮他们下载这些基础库
+dependencies = [
+    "google-genai",       # 大模型驱动核心
+    "numpy",              # 矩阵与中位数计算
+    "pandas",             # 数据处理
+    "matplotlib",         # 贝叶斯/物理图表绘制
+    "streamlit",          # 终端 UI 渲染
+    "fpdf2",              # PDF 简报生成引擎
+    "pydantic>=2.0.0"     # 强类型数据校验模型 (为下一步重构做准备)
+]
+
+# 项目链接：会展示在 PyPI 的主页左侧
+[project.urls]
+"Homepage" = "https://github.com/pystrategylab/phsl"
+"Bug Tracker" = "https://github.com/pystrategylab/phsl/issues"
